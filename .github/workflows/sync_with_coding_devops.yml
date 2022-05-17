@@ -15,15 +15,15 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: clone Git repo
-        uses: actions/checkout@v3
-      - name: set Git remote url
-        run: git remote add coding ${{ secrets.GIT_URL }}
-      - name: pull master branch from Coding DevOps
-        run: git pull coding master --rebase
-      - name: pull all tags from Coding DevOps
-        run: git fetch --all --tags
-      - name: push master branch to Coding DevOps
-        run: git push -f coding master
-      - name: push new tags to Coding DevOps
-        run: git push coding --tags
+      - uses: actions/checkout@v3
+      - run: git remote add coding ${{ secrets.GIT_URL }}
+      - run: git fetch coding master
+      - run: git merge coding/master
+      - run: git fetch --all --tags
+      # Coding
+      - run: git push coding master
+      - run: git push coding --tags
+      # GitHub
+      - uses: ad-m/github-push-action@master
+        with:
+          tags: true
