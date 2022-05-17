@@ -14,5 +14,5 @@ jobs:
         with:
           source_repo: https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@e.coding.net/quanttide/qtopen-python/coding-devops-sdk-py.git
           source_branch: master
+          destination_repo: quanttide/coding-devops-sdk-py
           destination_branch: master
-          sync_tags: true
