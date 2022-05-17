@@ -18,7 +18,6 @@ jobs:
       # https://github.com/marketplace/actions/git-sync-action
       - name: set Git remote url
         run: git remote add coding "https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@e.coding.net/quanttide/qtopen-python/coding-devops-sdk-py.git"
-        with:
       - name: pull master branch from Coding DevOps
         run: git pull -f coding master
       - name: pull all tags from Coding DevOps
