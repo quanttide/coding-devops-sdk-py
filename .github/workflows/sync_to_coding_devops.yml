@@ -1,0 +1,18 @@
+name: sync-to-coding-devops
+on:
+  push:
+    branches:
+      - master
+  release:
+    types: [published]
+jobs:
+  sync:
+    steps:
+      # https://github.com/marketplace/actions/git-sync-action
+      - name: sync-to-coding-devops
+        use: wei/git-sync@v3
+        with:
+          source_repo: quanttide/coding-devops-sdk-py
+          source_branch: master
+          destination_repo: https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@e.coding.net/quanttide/qtopen-python/coding-devops-sdk-py.git
+          destination_branch: master
