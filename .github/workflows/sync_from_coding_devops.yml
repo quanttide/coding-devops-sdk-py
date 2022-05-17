@@ -3,7 +3,7 @@ on:
   # https://kontent.ai/blog/how-to-trigger-github-action-using-webhook-with-no-code/
   repository_dispatch:
     types:
-      - webhook
+      - coding-devops-webhook
 jobs:
   sync:
     runs-on: ubuntu-latest
