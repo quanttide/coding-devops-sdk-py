@@ -5,6 +5,7 @@ on:
 jobs:
   steps:
     sync:
+      runs-on: ubuntu-latest
       steps:
         # https://github.com/marketplace/actions/github-repo-sync
         - use: repo-sync/github-sync@v2
