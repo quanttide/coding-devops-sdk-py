@@ -10,7 +10,7 @@ jobs:
     steps:
       # https://github.com/marketplace/actions/git-sync-action
       - name: sync-to-coding-devops
-        use: wei/git-sync@v3
+        uses: wei/git-sync@v3
         with:
           source_repo: quanttide/coding-devops-sdk-py
           source_branch: master
