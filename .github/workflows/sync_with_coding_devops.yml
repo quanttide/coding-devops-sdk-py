@@ -1,0 +1,28 @@
+name: sync-with-coding-devops
+on:
+  # GitHub -> Coding
+  push:
+    branches:
+      - master
+  release:
+    types: [published]
+  # Coding -> GitHub
+  # https://kontent.ai/blog/how-to-trigger-github-action-using-webhook-with-no-code/
+  repository_dispatch:
+    types:
+      - coding-devops-webhook
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/marketplace/actions/git-sync-action
+      - name: set Git remote url
+        run: git remote add coding https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@e.coding.net/quanttide/qtopen-python/coding-devops-sdk-py.git
+      - name: pull master branch from Coding DevOps
+        run: git pull -f coding master
+      - name: pull all tags from Coding DevOps
+        run: git fetch --all --tags
+      - name: push master branch to Coding DevOps
+        run: git push -f coding master
+      - name: push new tags to Coding DevOps
+        run: git push coding --tags
