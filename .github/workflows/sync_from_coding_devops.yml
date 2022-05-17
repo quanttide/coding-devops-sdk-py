@@ -1,16 +1,19 @@
 name: sync-from-coding-devops
 on:
-  # webhook
-
+  # https://kontent.ai/blog/how-to-trigger-github-action-using-webhook-with-no-code/
+  repository_dispatch:
+    types:
+      - webhook
 jobs:
   steps:
     sync:
       runs-on: ubuntu-latest
       steps:
         # https://github.com/marketplace/actions/github-repo-sync
-        - use: repo-sync/github-sync@v2
+        - name: sync-from-coding-devops
+          uses: repo-sync/github-sync@v2
           with:
-            source_repo: ''
+            source_repo: https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@e.coding.net/quanttide/qtopen-python/coding-devops-sdk-py.git
             source_branch: master
             destination_branch: master
             sync_tags: true
