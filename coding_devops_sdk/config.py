@@ -10,6 +10,6 @@ default_settings_files = ['settings.toml']
 settings = Dynaconf(
     settings_files=default_settings_files,
     environments=True,
-    envvar_prefix='CODINGSDK',
     load_dotenv=True,
+    envvar_prefix='CODINGSDK',
 )
