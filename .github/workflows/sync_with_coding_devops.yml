@@ -20,7 +20,7 @@ jobs:
       - name: set Git remote url
         run: git remote add coding ${{ secrets.GIT_URL }}
       - name: pull master branch from Coding DevOps
-        run: git pull -f coding master
+        run: git pull --ff-only coding master
       - name: pull all tags from Coding DevOps
         run: git fetch --all --tags
       - name: push master branch to Coding DevOps
