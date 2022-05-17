@@ -15,7 +15,8 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      # https://github.com/marketplace/actions/git-sync-action
+      - name: clone Git repo
+        uses: actions/checkout@v3
       - name: set Git remote url
         run: git remote add coding ${{ secrets.GIT_URL }}
       - name: pull master branch from Coding DevOps
