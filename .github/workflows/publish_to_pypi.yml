@@ -2,5 +2,15 @@ name: publish-to-pypi
 on:
   # https://docs.github.com/cn/actions/using-workflows/events-that-trigger-workflows#release
   release:
-    types: [released]
+    types: [published]
 jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: publish
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
