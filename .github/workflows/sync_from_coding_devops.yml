@@ -4,7 +4,7 @@ on:
     # 早晚10点各同步一次
     - cron: "0 10,22 * * *"
   # https://docs.github.com/cn/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
-  workflow_dispatch
+  workflow_dispatch:
 jobs:
   sync:
     runs-on: ubuntu-latest
