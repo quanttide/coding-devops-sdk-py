@@ -5,6 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "coding-devops-sdk-py"
 version = "0.1.0-alpha.2"
+long_description = "Coding DevOps SDK for Python"
+long_description_content_type = "text/markdown"
 classifiers = [
     "Programming Language :: Python :: 3",
 ]
