@@ -9,12 +9,11 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      # https://github.com/marketplace/actions/github-repo-sync
-      - name: sync-from-coding-devops
-        uses: repo-sync/github-sync@v2
+      # https://github.com/marketplace/actions/git-sync-action
+      - name: sync-to-coding-devops
+        uses: wei/git-sync@v3
         with:
           source_repo: https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@e.coding.net/quanttide/qtopen-python/coding-devops-sdk-py.git
           source_branch: master
+          destination_repo: quanttide/coding-devops-sdk-py
           destination_branch: master
-          # 同步Coding仓库标签，在GitHub手动发布
-          sync_tags: true
