@@ -4,11 +4,13 @@ Coding代码仓库Git操作
 
 import os
 import unittest
+from unittest import skip
 
 from coding_devops_sdk.depot import Git
 
 
 class GitTestCase(unittest.TestCase):
+    @skip
     def test_git_clone(self):
         project_name = 'demo'
         depot_name = 'demo'

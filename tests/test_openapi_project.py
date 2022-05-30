@@ -8,7 +8,6 @@ class ProjectAPITestCase(unittest.TestCase):
     def test_describe_project_by_name(self):
         return_data = coding_openapi_client.describe_project_by_name(project_name=settings.TEST_PROJECT_NAME)
         self.assertTrue(return_data)
-        print(return_data)
 
 
 if __name__ == '__main__':
