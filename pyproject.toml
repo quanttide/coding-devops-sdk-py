@@ -1,11 +1,15 @@
+# https://github.com/executablebooks/jupyter-book/blob/master/pyproject.toml
 [build-system]
 requires = ["setuptools>=61", "setuptools.scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "coding-devops-sdk-py"
-authors = [{name = "QuantTide Inc.", email = "opensource@quanttide.com"}]
-version = "0.1.0-alpha.2"
+version = "0.1.0-alpha.3"
+authors = [
+    {name = "QuantTide Inc.", email = "opensource@quanttide.com"}
+]
+description = "Python SDK for Coding DevOps"
 classifiers = [
     "Programming Language :: Python :: 3",
 ]

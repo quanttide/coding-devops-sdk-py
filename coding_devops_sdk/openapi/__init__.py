@@ -2,4 +2,4 @@
 Coding DevOps OpenAPI
 """
 
-from .client import CodingDevOpsAPIClient
+from .client import CodingDevOpsAPIClient, coding_openapi_client
