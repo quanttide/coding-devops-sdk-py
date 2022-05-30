@@ -5,9 +5,10 @@ APIClient
 import requests
 
 from coding_devops_sdk.config import settings
-from coding_devops_sdk.openapi.depot import DepotAPIMixin, IntegratedDepotAPIMixin
+from coding_devops_sdk.openapi.depot import DepotAPIMixin, IntegratedDepotAPIMixin, ReleaseAPIMixin, \
+    IntegratedReleaseAPIMixin
 from coding_devops_sdk.openapi.exceptions import raise_if_error
-from coding_devops_sdk.openapi.project import ProjectAPIMixin
+from coding_devops_sdk.openapi.project import ProjectAPIMixin, IntegratedProjectAPIMixin
 
 
 class BaseAPIClient(object):
@@ -36,9 +37,9 @@ class BaseAPIClient(object):
 
 class CodingDevOpsAPIClient(
     BaseAPIClient,
-    ProjectAPIMixin,
-    DepotAPIMixin,
-    IntegratedDepotAPIMixin,
+    ProjectAPIMixin, IntegratedProjectAPIMixin,
+    DepotAPIMixin, IntegratedDepotAPIMixin,
+    ReleaseAPIMixin, IntegratedReleaseAPIMixin,
 ):
     """
     Coding DevOps OpenAPI Client

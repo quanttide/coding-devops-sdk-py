@@ -17,6 +17,30 @@ class IntegratedDepotAPITestCase(unittest.TestCase):
         self.assertTrue(data)
         print(data)
 
+    def test_get_depot_id_by_name(self):
+        depot_id = coding_openapi_client.get_depot_id_by_name(
+            project_name=settings.TEST_PROJECT_NAME,
+            depot_name=settings.TEST_DEPOT_NAME,
+        )
+        self.assertEqual(settings.TEST_DEPOT_ID, depot_id)
+
+
+class ReleaseAPITestCase(unittest.TestCase):
+    def test_describe_git_releases(self):
+        data = coding_openapi_client.describe_git_releases(depot_id=settings.TEST_DEPOT_ID)
+        self.assertTrue(data)
+
+
+class IntegratedReleaseAPITestCase(unittest.TestCase):
+    def test_describe_git_releases_by_name(self):
+        data = coding_openapi_client.describe_git_releases_by_name(
+            project_name=settings.TEST_PROJECT_NAME,
+            depot_name=settings.TEST_DEPOT_NAME,
+            status=1
+        )
+        self.assertTrue(data)
+        print(data)
+
 
 if __name__ == '__main__':
     unittest.main()

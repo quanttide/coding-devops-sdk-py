@@ -46,5 +46,36 @@ class DepotAPIMixin(object):
 
 class IntegratedDepotAPIMixin(object):
     def describe_project_depot_info_list_by_name(self, project_name: str) -> list:
-        project_id = self.describe_project_by_name(project_name=project_name)['Id']
+        project_id = self.get_project_id_by_name(project_name)
         return self.describe_project_depot_info_list(project_id=project_id)
+
+    def get_depot_id_by_name(self, project_name, depot_name):
+        """
+
+        :param project_name:
+        :param depot_name:
+        :return:
+        """
+        depots = self.describe_project_depot_info_list_by_name(project_name)
+        # https://stackoverflow.com/questions/4391697/find-the-index-of-a-dict-within-a-list-by-matching-the-dicts-value
+        return next((depot for depot in depots if depot['Name'] == depot_name))['Id']
+
+
+class ReleaseAPIMixin(object):
+    def describe_git_releases(self, depot_id, status: int = 0, **kwargs):
+        """
+
+        :param depot_id:
+        :param status: 版本状态。0:全部；1:已发布；2:预发布。
+        :param kwargs:
+        :return:
+        """
+        kwargs['DepotId'] = depot_id
+        kwargs['Status'] = status
+        return self.request_api(action='DescribeGitReleases', **kwargs)['ReleasePageList']['Releases']
+
+
+class IntegratedReleaseAPIMixin(object):
+    def describe_git_releases_by_name(self, project_name, depot_name, **kwargs):
+        depot_id = self.get_depot_id_by_name(project_name, depot_name)
+        return self.describe_git_releases(depot_id)
