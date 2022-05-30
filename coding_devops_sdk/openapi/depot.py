@@ -1,17 +1,20 @@
-# -*- coding: utf-8 -*-
+"""
+代码仓库API
+"""
+
+from typing import Union
 
 
 class DepotAPIMixin(object):
     # ----- 仓库列表API -----
-    def describe_project_depots(self, project_id):
+    def describe_project_depot_info_list(self, project_id: Union[int, str]) -> list:
         """
         查询项目下仓库信息列表
 
         https://help.coding.net/openapi#04f0f34041e112aabd648c8381f31ca5
-
         :return:
         """
-        return self.request_api(action='DescribeProjectDepotInfoList')
+        return self.request_api(action='DescribeProjectDepotInfoList', project_id=project_id)['DepotData']['Depots']
 
     def describe_team_depots(self):
         """
@@ -39,3 +42,9 @@ class DepotAPIMixin(object):
         :return:
         """
         pass
+
+
+class IntegratedDepotAPIMixin(object):
+    def describe_project_depot_info_list_by_name(self, project_name: str) -> list:
+        project_id = self.describe_project_by_name(project_name=project_name)['Id']
+        return self.describe_project_depot_info_list(project_id=project_id)

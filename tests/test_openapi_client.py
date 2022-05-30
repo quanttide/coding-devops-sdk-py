@@ -12,7 +12,6 @@ class BaseAPIClientTestCase(unittest.TestCase):
         )
         self.assertTrue(data)
         self.assertTrue('Project' in data)
-        print(data['Project'])
 
 
 if __name__ == '__main__':

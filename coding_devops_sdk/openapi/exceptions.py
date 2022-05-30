@@ -13,3 +13,10 @@ class CodingOpenAPIException(Exception):
         Error Code: {self.code}
         Error Message: {self.message}
         """
+
+
+def raise_if_error(response: dict):
+    if 'Error' in response['Response']:
+        raise CodingOpenAPIException(code=response['Response']['Error']['Code'],
+                                     message=response['Response']['Error']['Message'],
+                                     request_id=response['Response']['RequestId'])

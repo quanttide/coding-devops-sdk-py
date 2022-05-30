@@ -1,9 +1,13 @@
-# -*- coding: utf-8 -*-
+"""
+APIClient
+"""
 
 import requests
 
 from coding_devops_sdk.config import settings
-from coding_devops_sdk.openapi.exceptions import CodingOpenAPIException
+from coding_devops_sdk.openapi.depot import DepotAPIMixin, IntegratedDepotAPIMixin
+from coding_devops_sdk.openapi.exceptions import raise_if_error
+from coding_devops_sdk.openapi.project import ProjectAPIMixin
 
 
 class BaseAPIClient(object):
@@ -22,18 +26,19 @@ class BaseAPIClient(object):
             'Authorization': f"token {self.token}"
         }
         r = requests.post('https://e.coding.net/open-api', json=data, headers=headers)
+        # 抛出网络请求异常
         r.raise_for_status()
         return_data = r.json()
-        if 'Error' in return_data['Response']:
-            raise CodingOpenAPIException(code=return_data['Response']['Error']['Code'],
-                                         message=return_data['Response']['Error']['Message'],
-                                         request_id=return_data['Response']['RequestId'])
-
+        # 抛出Coding服务器返回异常
+        raise_if_error(return_data)
         return return_data['Response']
 
 
 class CodingDevOpsAPIClient(
     BaseAPIClient,
+    ProjectAPIMixin,
+    DepotAPIMixin,
+    IntegratedDepotAPIMixin,
 ):
     """
     Coding DevOps OpenAPI Client
