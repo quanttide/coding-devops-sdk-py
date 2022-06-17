@@ -4,9 +4,12 @@
 
 from typing import Union
 
+from coding_devops_sdk.config import settings
+
+
+# ----- 仓库API -----
 
 class DepotAPIMixin(object):
-    # ----- 仓库列表API -----
     def describe_project_depot_info_list(self, project_id: Union[int, str]) -> list:
         """
         查询项目下仓库信息列表
@@ -49,17 +52,21 @@ class IntegratedDepotAPIMixin(object):
         project_id = self.get_project_id_by_name(project_name)
         return self.describe_project_depot_info_list(project_id=project_id)
 
-    def get_depot_id_by_name(self, project_name, depot_name):
+    def get_depot_id_by_name(self, depot_name, project_name=settings.DEFAULT_PROJECT_NAME):
         """
 
         :param project_name:
         :param depot_name:
         :return:
         """
+        if not project_name:
+            raise ValueError("project name should be not empty, please set project_name either directly or on project settings")
         depots = self.describe_project_depot_info_list_by_name(project_name)
         # https://stackoverflow.com/questions/4391697/find-the-index-of-a-dict-within-a-list-by-matching-the-dicts-value
         return next((depot for depot in depots if depot['Name'] == depot_name))['Id']
 
+
+# ----- 发布API -----
 
 class ReleaseAPIMixin(object):
     def describe_git_releases(self, depot_id, status: int = 0, **kwargs):
@@ -76,6 +83,8 @@ class ReleaseAPIMixin(object):
 
 
 class IntegratedReleaseAPIMixin(object):
-    def describe_git_releases_by_name(self, project_name, depot_name, **kwargs):
+    def describe_git_releases_by_name(self, depot_name, project_name=settings.DEFAULT_PROJECT_NAME, **kwargs):
+        if not project_name:
+            raise ValueError("project name should be not empty, please set project_name either directly or on project settings")
         depot_id = self.get_depot_id_by_name(project_name, depot_name)
         return self.describe_git_releases(depot_id)
