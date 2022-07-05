@@ -19,6 +19,8 @@ class BaseAPIClient(object):
         """
         self.team = team or settings.TEAM
         self.token = token or settings.AUTH_TOKEN
+        if not self.token:
+            raise ValueError("鉴权令牌不可为空，请设置token参数或传入AUTH_TOKEN配置项。")
 
     def request_api(self, action, **kwargs):
         data = {'Action': action}

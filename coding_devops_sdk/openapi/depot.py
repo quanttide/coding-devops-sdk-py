@@ -54,9 +54,8 @@ class IntegratedDepotAPIMixin(object):
 
     def get_depot_id_by_name(self, depot_name, project_name=settings.DEFAULT_PROJECT_NAME):
         """
-
-        :param project_name:
         :param depot_name:
+        :param project_name:
         :return:
         """
         if not project_name:
@@ -86,5 +85,5 @@ class IntegratedReleaseAPIMixin(object):
     def describe_git_releases_by_name(self, depot_name, project_name=settings.DEFAULT_PROJECT_NAME, **kwargs):
         if not project_name:
             raise ValueError("project name should be not empty, please set project_name either directly or on project settings")
-        depot_id = self.get_depot_id_by_name(project_name, depot_name)
+        depot_id = self.get_depot_id_by_name(depot_name=depot_name, project_name=project_name)
         return self.describe_git_releases(depot_id)

@@ -17,8 +17,8 @@ class IntegratedDepotAPITestCase(unittest.TestCase):
 
     def test_get_depot_id_by_name(self):
         depot_id = coding_openapi_client.get_depot_id_by_name(
-            project_name=settings.TEST_PROJECT_NAME,
             depot_name=settings.TEST_DEPOT_NAME,
+            project_name=settings.TEST_PROJECT_NAME,
         )
         self.assertEqual(settings.TEST_DEPOT_ID, depot_id)
 

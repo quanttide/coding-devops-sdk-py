@@ -1,2 +1,5 @@
+[default]
+# 默认项目
 DEFAULT_PROJECT_NAME = "@none None"
+# 默认仓库
 DEFAULT_DEPOT_NAME = "@none None"
