@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [v0.1.1] - 2022-07-05
+
+### Bugfix
+
+OpenAPI:
+- Fix internal parameter usage error of `describe_git_releases_by_name`.
+
 ## [v0.1.0] - 2022-06-17
 
 Minimal available version. Add `OpenAPIClient`。
