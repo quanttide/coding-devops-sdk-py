@@ -22,6 +22,15 @@ class IntegratedDepotAPITestCase(unittest.TestCase):
         )
         self.assertEqual(settings.TEST_DEPOT_ID, depot_id)
 
+    @unittest.skip('测试通过，待优化测试使之可复用')
+    def test_modify_git_transfer_by_name(self):
+        new_depot_path = coding_openapi_client.modify_git_transfer_by_name(
+            source_project_name=settings.TEST_SOURCE_PROJECT_NAME,
+            source_depot_name=settings.TEST_SOURCE_DEPOT_NAME,
+            target_project_name=settings.TEST_TARGET_PROJECT_NAME,
+        )
+        self.assertTrue(new_depot_path)
+
 
 class ReleaseAPITestCase(unittest.TestCase):
     def test_describe_git_releases(self):

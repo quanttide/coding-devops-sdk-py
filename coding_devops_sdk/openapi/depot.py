@@ -46,6 +46,13 @@ class DepotAPIMixin(object):
         """
         pass
 
+    def modify_git_transfer(self, depot_id, target_project_id) -> str:
+        """
+        仓库转移至同团队下的其他项目中
+        :return: 转移后Web页面的访问路径
+        """
+        return self.request_api(action='ModifyGitTransfer', depot_id=depot_id, target_project_id=target_project_id)["NewDepotPath"]
+
 
 class IntegratedDepotAPIMixin(object):
     def describe_project_depot_info_list_by_name(self, project_name: str) -> list:
@@ -63,6 +70,19 @@ class IntegratedDepotAPIMixin(object):
         depots = self.describe_project_depot_info_list_by_name(project_name)
         # https://stackoverflow.com/questions/4391697/find-the-index-of-a-dict-within-a-list-by-matching-the-dicts-value
         return next((depot for depot in depots if depot['Name'] == depot_name))['Id']
+
+    def modify_git_transfer_by_name(self, source_project_name, source_depot_name, target_project_name, target_depot_name=None):
+        """
+
+        :param source_project_name:
+        :param source_depot_name:
+        :param target_project_name:
+        :param target_depot_name: 填写时改成新名字
+        :return:
+        """
+        depot_id = self.get_depot_id_by_name(depot_name=source_depot_name, project_name=source_project_name)
+        target_project_id = self.get_project_id_by_name(project_name=target_project_name)
+        return self.modify_git_transfer(depot_id=depot_id, target_project_id=target_project_id)
 
 
 # ----- 发布API -----
