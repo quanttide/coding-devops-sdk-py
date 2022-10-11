@@ -69,7 +69,11 @@ class IntegratedDepotAPIMixin(object):
             raise ValueError("project name should be not empty, please set project_name either directly or on project settings")
         depots = self.describe_project_depot_info_list_by_name(project_name)
         # https://stackoverflow.com/questions/4391697/find-the-index-of-a-dict-within-a-list-by-matching-the-dicts-value
-        return next((depot for depot in depots if depot['Name'] == depot_name))['Id']
+        try:
+            return next((depot for depot in depots if depot['Name'] == depot_name))['Id']
+        except StopIteration:
+            # TODO：临时补丁，优化实现。
+            raise Exception(f"项目{project_name}不存在仓库{depot_name}")
 
     def modify_git_transfer_by_name(self, source_project_name, source_depot_name, target_project_name, target_depot_name=None):
         """
