@@ -17,7 +17,7 @@ class DepotAPIMixin(object):
         https://help.coding.net/openapi#04f0f34041e112aabd648c8381f31ca5
         :return:
         """
-        return self.request_api(action='DescribeProjectDepotInfoList', project_id=project_id)['DepotData']['Depots']
+        return self.request_api(action='DescribeProjectDepotInfoList', ProjectId=project_id)['DepotData']['Depots']
 
     def describe_team_depots(self):
         """
@@ -103,6 +103,17 @@ class ReleaseAPIMixin(object):
         kwargs['DepotId'] = depot_id
         kwargs['Status'] = status
         return self.request_api(action='DescribeGitReleases', **kwargs)['ReleasePageList']['Releases']
+
+    def create_git_release(self, depot_id, user_id, tag_name, commit_sha,
+                           target_commitish, title, description, pre: bool) -> bool:
+        """
+        https://coding.net/help/openapi#fa6fe573f5adbfd00c0f1e8e742f4730
+
+        :param depot_id: 仓库 Id
+        :param pre: 是否预发布
+        :return:
+        """
+        pass
 
 
 class IntegratedReleaseAPIMixin(object):

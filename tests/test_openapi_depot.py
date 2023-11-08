@@ -8,12 +8,14 @@ class DepotAPITestCase(unittest.TestCase):
     def test_describe_project_depot_info_list(self):
         data = coding_openapi_client.describe_project_depot_info_list(project_id=settings.TEST_PROJECT_ID)
         self.assertTrue(data)
+        print(data)
 
 
 class IntegratedDepotAPITestCase(unittest.TestCase):
     def test_describe_project_depot_info_list_by_name(self):
         data = coding_openapi_client.describe_project_depot_info_list_by_name(project_name=settings.TEST_PROJECT_NAME)
         self.assertTrue(data)
+        print(data)
 
     def test_get_depot_id_by_name(self):
         depot_id = coding_openapi_client.get_depot_id_by_name(
