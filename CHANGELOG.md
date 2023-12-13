@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## [v0.1.2] - 2023-12-13
+
+### Add 
+
+- OpenAPI: Add `modify_git_transfer` API.
+
+### Bugfix
+
+- OpenAPI: Fix `describe_project_depot_info_list` and `get_depot_id_by_name` internal parameter usage error.
+
 ## [v0.1.1] - 2022-07-05
 
 ### Bugfix
